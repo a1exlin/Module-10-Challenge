@@ -1,5 +1,5 @@
-// Manager card template
-const manager = managerData => {
+// this template.js will be coded into the html generator that creates the following cards below
+const manager = managerData=> {
     return `
     <div id="${managerData.getRole()}-card" class="box card">
       <div class="box name-role manager-name">
@@ -16,7 +16,8 @@ const manager = managerData => {
     </div>
   `
   }
-  // Engineer card template
+
+  
   const engineer = engineerData => {
     return `
     <div id="${engineerData.getRole()}-card" class="box card">
@@ -37,7 +38,8 @@ const manager = managerData => {
     </div>
   `
   }
-  // Intern card template
+
+
   const intern = internData => {
     return `
     <div id="${internData.getRole()}-card" class="box card">
@@ -71,7 +73,9 @@ const manager = managerData => {
       }
     } return employeeHtml
   }
-  // html page template
+
+
+
   const template = data => {
     return `
     <!DOCTYPE html>
