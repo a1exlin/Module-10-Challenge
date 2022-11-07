@@ -1,5 +1,5 @@
 // this template.js will be coded into the html generator that creates the following cards below
-const manager = managerData => {
+const manager = managerData=> {
     return `
     <div id="${managerData.getRole()}-card" class="box card">
       <div class="box name-role manager-name">
