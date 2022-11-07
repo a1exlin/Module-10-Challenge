@@ -56,18 +56,18 @@ const manager = managerData => {
   `
   }
   // iterates through answers array, creates cards for each team member, then combines all cards together
-  const employeesDiv = employeesArr => {
+  const employeesDiv = employeesQuestions => {
     let employeeHtml = ''
   
-    for ( i = 0; i < employeesArr.length; i++ ) {
-      if (employeesArr[i].getRole() === "Manager"){
-        employeeHtml = employeeHtml + manager(employeesArr[i])
+    for ( i = 0; i < employeesQuestions.length; i++ ) {
+      if (employeesQuestions[i].getRole() === "Manager"){
+        employeeHtml = employeeHtml + manager(employeesQuestions[i])
       }
-      if (employeesArr[i].getRole() === "Engineer"){
-        employeeHtml = employeeHtml + engineer(employeesArr[i])
+      if (employeesQuestions[i].getRole() === "Engineer"){
+        employeeHtml = employeeHtml + engineer(employeesQuestions[i])
       }
-      if (employeesArr[i].getRole() === "Intern"){
-        employeeHtml = employeeHtml + intern(employeesArr[i])
+      if (employeesQuestions[i].getRole() === "Intern"){
+        employeeHtml = employeeHtml + intern(employeesQuestions[i])
       }
     } return employeeHtml
   }
