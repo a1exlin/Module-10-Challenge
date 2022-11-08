@@ -1,150 +1,69 @@
 // run node index.js here
 const inquirer = require('inquirer');
 const fs = require('fs');
-const htmlgen = require('../utils/generate.js');
+const generate = require('../utils/generate.js');
+const { Engineers, EngineerQ } = require('../assets/Engineer.js');
 
-function questionBank1() {
-	inquirer
-		.prompt([
-			{
-				type: 'input',
-				message: 'Welcome Team Manager, What is your name?',
-				name: 'ManagerName',
-			},
+const {Manager, ManagerQuestions} = require('./assets/Manager.js');
+const {Engineer, EngineerQuestions} = require('./assets/Engineer');
+const {Intern, InterQuestions} = require('./assets/Intern');
+const { init } = require('../../Project-2/models/User.js');
 
-			{
-				type: 'input',
-				message: 'Please enter your employee ID',
-				name: 'ID',
-			},
+// code below will be sent into this Employee array when code is running on node.js
+const Employees = [];
 
-			{
-				type: 'input',
-				message: 'What is your email address? ',
-				name: 'email',
-			},
-			{
-				type: 'list',
-				message: "Please select your employee's status",
-				choices: ["Engineer", "Intern",],
-				name: "status",
+const display = () => {
+	managerQ
+}
+const managerQ =() => {
+	inquirer.prompt(ManagerQuestions)
 
+	.then((answers) =>{
+		answer = new Manager(answer.name, answers.id, answers.email, answers.officeNum)
+		return EmployeesPrompt();
+	})
 
-				// filter function prints out userinput choice
-				filter(val) {
-
-					return val.toLowerCase();
-				}
-			}
-		])
-
-		.then(answer => {
-			if (answer.menuoption === "Engineer") {
-				questionBank2();
-			}
-			if (answer.menuoption === "Intern") {
-				questionBank3();
-			}
-			if(answer.menuoption === "exit") {
-
-			}
-		});
 }
 
-function questionBank2() {
-	inquirer
-		.prompt([
+const engineerQ =() => {
+	inquirer.promt(EngineerQuestions) 
+	.then((answers) => {
+		answers = new Engineers(answer.name, answer.id, answers.github);
+		Employees.push(answers);
+		return EmployeePrompts();
+	})
 
-			{
-				type: 'input',
-				message: 'What is your name engineer?',
-				name: 'engineerName',
-			},
-			{
-				type: 'input',
-				message: 'What is your ID?',
-				name: 'engineerID',
-			},
-			{
-				type: 'input',
-				message: 'What is your email address?',
-				name: 'engineerEmail',
-			},
-			{
-				type: 'input',
-				message: 'What is your Github username?',
-				name: 'Github',
-			},
+}
+const InternQ =() => {
+	inquirer.prompt(InterQuestions)
+	.then((answers) => {
+		answers = new Intern(answers.name, answers.id, answers.email, answers.school)
 
-		])
-		.then(answer => {
-			console.log(answer.second);
-			questionBank1();
-		});
+		display.push(answers);
+		return EmployeesPrompt();
+	})
 }
 
-function questionBank3() {
-	inquirer
-		.prompt([
-			{
-				type: 'input',
-				name: 'InternName',
-				message: 'Welcome Intern, what is your name?',
-			},
+const EmployeesPrompt = () => {
+	inquirer.prompt([{
+		type: 'list',
+		name: 'employeeType',
+		message: 'What kind of team member would you like to add?',
+		choices: [
+			{name: 'Engineer', value:  'addEngineer'},
+			{name: 'Intern', value: 'addIntern'},
+		]
+	}])
+	.then(answer => {
+		if(answer.employeeType === 'addEngineer') { engineerQ();};
+		if(answer.employeeType === 'addintern') { internQ();};
+		if(answer.employeeType === 'finished')  {
+			let html = template(Employees)
+			console.log('...');
+			fs.writeFile(html);
 
-			{
-				type: 'input',
-				name: 'InternID',
-				message: 'What is your ID?',
+		}
+	})
+};
 
-			},
-
-			{
-				type: 'input',
-				name: 'InternEmail',
-				message: 'What is your email?',
-
-			},
-
-			{
-				type: 'input',
-				name: 'School',
-				message: 'What school do you attend?',
-
-			},
-		])
-		.then(answer => {
-			console.log(answer.third);
-			questionBank1();
-		});
-}
-
-
-// function to run the questions on terminal
-function readQuestion() {
-    return inquirer.prompt(readQuestion)
-
-        .then((data) => {
-            const mark = htmlgen.display(data)
-            fs.writeFile('index.html', mark, function (err) {
-                if (err) {
-                    console.log(mark);
-                    console.log("filed could not be saved");
-                }
-                else {
-                    console.log('Sucess!');
-                    console.log('Generating HTML file...');
-                }
-
-            })
-
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-}
-
-// calling the function back
-questionBank1();
-readQuestion();
-
+display();
