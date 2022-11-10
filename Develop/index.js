@@ -1,11 +1,12 @@
 // run node index.js here
+// updated Intern error with capitalizing the "i"
 const inquirer = require('inquirer');
 const template = require('../sources/template');
 const fs = require('fs');
 const generate = require('../utils/generate.js');
 const {Manager, ManagerQuestions} = require('../assets/Manager');
 const {Engineer, EngineerQuestions} = require('../assets/Engineer');
-const {Intern, InterQuestions} = require('../assets/Intern');
+const {Intern, InternQuestions} = require('../assets/Intern');
 
 
 // code below will be sent into this Employee array when code is running on node.js
@@ -35,10 +36,9 @@ const EngineerQ =() => {
 
 }
 const InternQ =() => {
-	inquirer.prompt(InterQuestions)
+	inquirer.prompt(InternQuestions)
 	.then((answers) => {
-		let intern = new Intern(answers.name, answers.id, answers.email, answers.school)
-
+		let intern = new Intern(answers.name, answers.id, answers.InternEmail, answers.school);
 		Employees.push(intern);
 		return EmployeesPrompt();
 	})
@@ -58,7 +58,7 @@ const EmployeesPrompt = () => {
 
 	.then(answer => {
 		if(answer.employeeType === 'addEngineer') { EngineerQ();};
-		if(answer.employeeType === 'addintern') { InternQ();};
+		if(answer.employeeType === 'addIntern') { InternQ();};
 		if(answer.employeeType === 'finished')  {
 			let html = template(Employees)
 			console.log('...');

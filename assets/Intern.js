@@ -1,6 +1,6 @@
 const Employee = require("./Employee");
 
-const InterQuestions = [
+const InternQuestions = [
     {
         type: 'input',
         name: 'InternName',
@@ -31,21 +31,24 @@ const InterQuestions = [
 ]
 
 class Intern extends Employee {
-    constructor(name, id, school) {
-        super(name, id, email);
+    constructor(name, id, school, InternEmail) {
+        super(name, id, InternEmail);
         this.school = school;
     }
-    getSchoo() {
 
-        return this.school;
-
-    }
     getRole() {
 
         return 'Intern';
     }
+    getSchool() {
+
+        return this.school;
+
+    }
+
+ 
 }
 
-module.exports= {Intern, InterQuestions};
+module.exports= {Intern, InternQuestions};
 
 
