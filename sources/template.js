@@ -10,7 +10,7 @@ const manager = managerData => {
         <ul class="list-group">
           <li class="list-group-item">ID: ${managerData.getId()}</li>
           <li class="list-group-item">Email: <a href="mailto:${managerData.getEmail()}">${managerData.getEmail()}</a></li>
-          <li class="list-group-item">Office Number: ${managerData.getOfficeNumber()}</li>
+          <li class="list-group-item">Office Number: ${managerData.getOfficeNum()}</li>
         </ul>
       </div>
     </div>

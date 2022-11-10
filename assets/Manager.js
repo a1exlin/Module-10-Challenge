@@ -34,13 +34,10 @@ const ManagerQuestions = [
 
 class Manager extends Employee {
     constructor(name, id, email, officeNum) {
-
-    
         super(name, id, email,);
         this.officeNum = officeNum;
 
     }
-
 
     getRole() {
 
@@ -50,6 +47,10 @@ class Manager extends Employee {
     getOfficeNum() {
 
         return this.officeNum;
+    }
+
+    getId() {
+        return 'ID';
     }
 
 }
